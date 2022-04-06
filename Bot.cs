@@ -88,7 +88,6 @@ namespace PxlsAutomaton
         {
             Logger.Log($"Drawing {TargetImage.Width}x{TargetImage.Height} dithered image " +
                         $"at ({BotConfig.PositionX}, {BotConfig.PositionY}) with {BotConfig.PixelDelay}ms delay...", LogSeverity.Message);
-            Logger.Log("Percentage complete: %0.", LogSeverity.Message);
 
             for (int y = 0; y < TargetImage.Height; y++)
             {
