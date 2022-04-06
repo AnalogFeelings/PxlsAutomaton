@@ -29,6 +29,7 @@ namespace PxlsAutomaton
                 string DefaultJson = JsonConvert.SerializeObject(BotConfig, SerializerSettings);
 
                 File.WriteAllText("config.json", DefaultJson);
+                BotConfig = null;
 
                 return;
             }
@@ -112,7 +113,7 @@ namespace PxlsAutomaton
 
                     await SocketClient.SendAsync(Encoding.UTF8.GetBytes(JsonPixel), WebSocketMessageType.Text, true, SendTimeoutToken.Token);
 
-                    Thread.Sleep(BotConfig.PixelDelay);
+                    await Task.Delay(BotConfig.PixelDelay);
                 }
             }
 

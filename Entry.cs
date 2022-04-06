@@ -1,6 +1,7 @@
 ﻿using Figgle;
 using Pastel;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace PxlsAutomaton
 {
@@ -8,7 +9,7 @@ namespace PxlsAutomaton
     {
         public static void Main(string[] args)
         {
-            if (Environment.OSVersion.Version.Major < 10) ConsoleExtensions.Disable();
+            if (Environment.OSVersion.Version.Major < 10 && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ConsoleExtensions.Disable();
 
             Console.Title = "PxlsAutomaton";
             Console.Write(FiggleFonts.Slant.Render("PxlsAutomaton").Pastel("#77b6a9"));
