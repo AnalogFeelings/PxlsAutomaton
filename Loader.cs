@@ -33,13 +33,13 @@ namespace PxlsAutomaton
                     File.WriteAllBytes(TargetFilename, ImageBytes);
                     LoadedImage = TargetFilename;
 
-                    if (Width <= 0 || Height <= 0) return (Bitmap)Image.FromFile(TargetFilename);
+                    if (Width <= 0 || Height <= 0) return new Bitmap(TargetFilename);
                     else return LoadAndResizeBmp(TargetFilename, Width, Height);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Log("ERROR: " + ex.Message, LogSeverity.Error);
+                Logger.Log("[bold]ERROR:[/] " + ex.Message, LogSeverity.Error);
 
                 return null;
             }
@@ -47,7 +47,7 @@ namespace PxlsAutomaton
 
         public Bitmap LoadAndResizeBmp(string Filename, int Width, int Height)
         {
-            Bitmap SourceImage = new Bitmap(Image.FromFile(Filename));
+            Bitmap SourceImage = new Bitmap(Filename);
             Bitmap ResultImage = new Bitmap(Width, Height);
 
             using (Graphics GdiGraphics = Graphics.FromImage(ResultImage))
@@ -56,6 +56,8 @@ namespace PxlsAutomaton
                 GdiGraphics.InterpolationMode = InterpolationMode.NearestNeighbor;
                 GdiGraphics.DrawImage(SourceImage, 0, 0, Width, Height);
             }
+
+            SourceImage.Dispose();
 
             return ResultImage;
         }

@@ -44,13 +44,14 @@ namespace PxlsAutomaton
             if (BotConfig == null) return;
 
             if (BotConfig.PixelDelay < 50)
-                Logger.Log($"A pixel delay of {BotConfig.PixelDelay}ms may cause timing issues. Please set it to 50ms or more.", LogSeverity.Warning);
+                Logger.Log($"A pixel delay of [bold lightgoldenrod2_2]{BotConfig.PixelDelay}ms[/] may cause timing issues. " +
+                    $"Please set it to [bold lightgoldenrod2_2]50ms[/] or more.", LogSeverity.Warning);
 
-            if (BotConfig.ImageWidth <= 0 || BotConfig.ImageHeight <= 0) Logger.Log($"Downloading and resizing image from {BotConfig.ImageUrl}...", LogSeverity.Message);
-            else Logger.Log($"Downloading image from {BotConfig.ImageUrl}...", LogSeverity.Message);
+            if (BotConfig.ImageWidth <= 0 || BotConfig.ImageHeight <= 0) Logger.Log($"Downloading and resizing image from [bold dodgerblue1]{BotConfig.ImageUrl}[/]...", LogSeverity.Message);
+            else Logger.Log($"Downloading image from [bold dodgerblue1]{BotConfig.ImageUrl}[/]...", LogSeverity.Message);
             Bitmap DownloadedBitmap = Loader.DownloadImageAndResize(BotConfig.ImageUrl, BotConfig.ImageWidth, BotConfig.ImageHeight);
 
-            if(DownloadedBitmap == null) return;
+            if (DownloadedBitmap == null) return;
 
             Logger.Log("Downloaded image successfully!", LogSeverity.Success);
 
@@ -59,7 +60,7 @@ namespace PxlsAutomaton
 
             Logger.Log("Image dithered successfully!", LogSeverity.Success);
 
-            Logger.Log($"Attempting to open websocket connection to \"{BotConfig.PxlsUrl}\"...", LogSeverity.Message);
+            Logger.Log($"Attempting to open websocket connection to \"[bold dodgerblue1]{BotConfig.PxlsUrl}[/]\"...", LogSeverity.Message);
             try
             {
                 CancellationTokenSource TimeoutToken = new CancellationTokenSource();
@@ -74,7 +75,7 @@ namespace PxlsAutomaton
             }
             catch (Exception ex)
             {
-                Logger.Log("ERROR: " + ex.Message, LogSeverity.Error);
+                Logger.Log("[bold]ERROR:[/] " + ex.Message, LogSeverity.Error);
             }
             finally
             {
@@ -87,8 +88,14 @@ namespace PxlsAutomaton
 
         private async Task SendThread()
         {
+            TimeSpan TotalMilliseconds = TimeSpan.FromMilliseconds(TargetImage.Width * TargetImage.Height * BotConfig.PixelDelay);
+            int TotalPixels = TargetImage.Width * TargetImage.Height;
+
             Logger.Log($"Drawing {TargetImage.Width}x{TargetImage.Height} dithered image " +
                         $"at ({BotConfig.PositionX}, {BotConfig.PositionY}) with {BotConfig.PixelDelay}ms delay...", LogSeverity.Message);
+
+            Logger.Log($"Drawing this image will take approximately [bold dodgerblue1]{TotalMilliseconds:hh} hour(s)[/], " +
+                $"[bold dodgerblue1]{TotalMilliseconds:mm} minute(s)[/] and [bold dodgerblue1]{TotalMilliseconds:ss} second(s)[/].", LogSeverity.Message);
 
             for (int y = 0; y < TargetImage.Height; y++)
             {

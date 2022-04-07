@@ -1,5 +1,4 @@
-﻿using Pastel;
-using System.Drawing;
+﻿using Spectre.Console;
 
 namespace PxlsAutomaton
 {
@@ -22,16 +21,16 @@ namespace PxlsAutomaton
                 switch (Severity)
                 {
                     case LogSeverity.Error:
-                        Console.WriteLine($"[{"X".Pastel(Color.Red)}] {Message.Pastel(Color.IndianRed)}");
+                        AnsiConsole.MarkupLine($"[[[#FF0000]X[/]]] [#CD5C5C]{Message}[/]");
                         break;
                     case LogSeverity.Message:
-                        Console.WriteLine($"[{"*".Pastel(Color.CadetBlue)}] {Message.Pastel(Color.LightSkyBlue)}");
+                        AnsiConsole.MarkupLine($"[[[#5F9EA0]*[/]]] [#87CEFA]{Message}[/]");
                         break;
                     case LogSeverity.Success:
-                        Console.WriteLine($"[{"√".Pastel(Color.LightGreen)}] {Message.Pastel(Color.PaleGreen)}");
+                        AnsiConsole.MarkupLine($"[[[#90EE90]√[/]]] [#98FB98]{Message}[/]");
                         break;
                     case LogSeverity.Warning:
-                        Console.WriteLine($"[{"!".Pastel(Color.Gold)}] {Message.Pastel(Color.Yellow)}");
+                        AnsiConsole.MarkupLine($"[[[#FFD700]![/]]] [#FFFF00]{Message}[/]");
                         break;
                 }
             }

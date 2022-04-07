@@ -1,7 +1,5 @@
 ﻿using Figgle;
-using Pastel;
-using System.Drawing;
-using System.Runtime.InteropServices;
+using Spectre.Console;
 
 namespace PxlsAutomaton
 {
@@ -9,14 +7,11 @@ namespace PxlsAutomaton
     {
         public static void Main(string[] args)
         {
-            if (Environment.OSVersion.Version.Major < 10 && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ConsoleExtensions.Disable();
-
             Console.Title = "PxlsAutomaton";
-            Console.Write(FiggleFonts.Slant.Render("PxlsAutomaton").Pastel("#77b6a9"));
-            Console.Write("------------".Pastel(Color.CornflowerBlue));
-            Console.Write("By AestheticalZ || https://github.com/AestheticalZ".Pastel(Color.Aqua));
-            Console.WriteLine("------------".Pastel(Color.CornflowerBlue));
-            Console.WriteLine();
+            Console.WindowWidth = 160;
+            AnsiConsole.Markup($"[#77b6a9]{FiggleFonts.Slant.Render("PxlsAutomaton")}[/]");
+            AnsiConsole.MarkupLine("[#6495ed]===========[/] [#00ffff]By AestheticalZ || https://github.com/AestheticalZ[/] [#6495ed]===========[/]");
+            AnsiConsole.WriteLine();
 
             Bot BotBehavior = new Bot();
             BotBehavior.LoadConfig();
