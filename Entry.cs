@@ -8,7 +8,6 @@ namespace PxlsAutomaton
         public static void Main(string[] args)
         {
             Console.Title = "PxlsAutomaton";
-            Console.WindowWidth = 160;
             AnsiConsole.Markup($"[#77b6a9]{FiggleFonts.Slant.Render("PxlsAutomaton")}[/]");
             AnsiConsole.MarkupLine("[#6495ed]===========[/] [#00ffff]By AestheticalZ || https://github.com/AestheticalZ[/] [#6495ed]===========[/]");
             AnsiConsole.WriteLine();
